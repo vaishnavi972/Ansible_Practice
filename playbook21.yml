@@ -1,0 +1,15 @@
+---
+- name: Error handling
+  hosts: all
+  tasks:
+   - block:
+      - name: Install apache2
+        apt:
+         name: apache2
+         state: present
+     rescue:
+      - name: Install httpd
+        yum:
+         name: httpd
+         state: present 
+...

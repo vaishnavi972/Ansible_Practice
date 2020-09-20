@@ -1,0 +1,33 @@
+---
+- name: Setup software required for JenkinsServer
+  hosts: jenkins
+  tasks:
+   - name: Install necessary software
+     apt:
+      name: "{{item.a}}"
+      state: present
+      update_cache: "{{item.c}}"
+     with_items:
+      - {a: openjdk-8-jdk,c: yes}
+      - {a: git,c: no}
+      - {a: maven,c: no}
+   - name: Download jenkins.war
+     get_url:
+      url: https://get.jenkins.io/war-stable/2.235.5/jenkins.war
+      dest: /home/ubuntu
+- name: Setup of tomcat8 on QAServer and ProdServer
+  hosts: servers
+  tasks:
+   - name: Install tomcat8 and tomcat8-admin
+     apt:
+      name: "{{item.a}}"
+      state: present
+      update_cache: "{{item.c}}"
+     with_items:
+      - {a: tomcat8,c: yes}
+      - {a: tomcat8-admin,c: no}
+   - name: Copy tomcat-users.xml into /etc/tomcat8 folder
+     copy:
+      src: tomcat-users.xml
+      dest: /etc/tomcat8
+...

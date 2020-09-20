@@ -1,0 +1,14 @@
+---
+- name: Installing softwares using loops by changing one variable
+  hosts: all
+  tasks:
+   - name: Install softwares
+     apt:
+      name: "{{item}}"
+      state: present
+      update_cache: yes
+     with_items:
+      - tree
+      - tomcat8
+      - git
+...

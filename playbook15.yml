@@ -1,0 +1,21 @@
+---
+- name: create multiple users and copy files into their home directories using loops
+  hosts: all
+  tasks:
+   - name: create multiple users
+     user:
+      name: "{{item.a}}"
+      password: "{{item.b}}"
+      uid: "{{item.c}}"
+      home: "{{item.d}}"
+     with_items:
+      - {a: Anvi,b: anvi,c: 4040,d: /home/ubuntu/Anvi}
+      - {a: Pavi,b: pavi,c: 5050,d: /home/Pavi}
+   - name: copy files into user's home directory
+     copy:
+      src: "{{item.a}}"
+      dest: "{{item.b}}"
+     with_items:
+      - {a: /etc/passwd,b: /home/ubuntu/Anvi}
+      - {a: /etc/group,b: /home/Pavi}
+...

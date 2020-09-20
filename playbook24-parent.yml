@@ -1,0 +1,7 @@
+---
+- name: Call child playbook to uninstall tree
+  hosts: all
+  tasks:
+   - name: call child playbook
+     include: playbook24-child.yml
+...

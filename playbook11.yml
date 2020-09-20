@@ -1,0 +1,10 @@
+---
+- name: Install tree using group host scope variable
+  hosts: webserver
+  tasks:
+   - name: Install tree
+     apt:
+      name: "{{f}}"
+      state: "{{g}}"
+      update_cache: "{{h}}"
+...

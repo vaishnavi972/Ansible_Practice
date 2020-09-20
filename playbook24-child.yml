@@ -1,0 +1,7 @@
+---
+- name: Uninstall tree
+  apt:
+   name: tree
+   state: absent
+   update_cache: no
+...

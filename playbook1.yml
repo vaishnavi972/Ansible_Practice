@@ -1,0 +1,9 @@
+---
+- name: create a file on remote server
+  hosts: all
+  tasks:
+   - name: create a file
+     file:
+      name: /tmp/file100
+      state: touch
+...
